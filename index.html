@@ -334,6 +334,7 @@ body {
           <button type="submit" class="btn btn-primary">提交并获取诊断报告</button>
         </div>
       </form>
+      <iframe name="hiddenFrame" style="display:none;"></iframe>
       <div class="form-success" id="formSuccess">
         <div class="form-success-icon">&#10003;</div>
         <div class="form-success-title">提交成功！</div>
@@ -813,24 +814,26 @@ function submitForm(e) {
   };
   console.log('[Lead Submission]', JSON.stringify(payload, null, 2));
 
-  // Send to email via formsubmit.co
-  fetch('https://formsubmit.co/ajax/21291228@qq.com', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
-      企业名称: company,
-      联系人: name,
-      手机号: phone,
-      城市: city,
-      行业: industry,
-      企业规模: scale,
-      来源: '数据资产入表自测H5',
-      提交时间: payload.timestamp,
-      _subject: '【数据资产自测】新线索',
-      _captcha: 'false',
-      _template: 'table'
-    })
-  }).catch(() => {});
+  // Send to email via formsubmit.co (traditional POST for activation)
+  const hiddenForm = document.createElement('form');
+  hiddenForm.action = 'https://formsubmit.co/21291228@qq.com';
+  hiddenForm.method = 'POST';
+  hiddenForm.target = 'hiddenFrame';
+  hiddenForm.style.display = 'none';
+  const fields = {
+    企业名称: company, 联系人: name, 手机号: phone, 城市: city,
+    行业: industry, 企业规模: scale,
+    来源: '数据资产入表自测H5', 提交时间: payload.timestamp,
+    _subject: '【数据资产自测】新线索', _captcha: 'false', _template: 'table'
+  };
+  Object.entries(fields).forEach(([k, v]) => {
+    const input = document.createElement('input');
+    input.type = 'hidden'; input.name = k; input.value = v;
+    hiddenForm.appendChild(input);
+  });
+  document.body.appendChild(hiddenForm);
+  hiddenForm.submit();
+  setTimeout(() => document.body.removeChild(hiddenForm), 1000);
 
   // Show success
   document.getElementById('leadForm').style.display = 'none';
