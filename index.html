@@ -6,7 +6,6 @@
 <title>数据资产入表条件自测 | 云端互联</title>
 <meta name="description" content="18道专业测评，3分钟快速诊断您的企业是否具备入表条件">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="https://smtpjs.com/v3/smtp.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -335,7 +334,6 @@ body {
           <button type="submit" class="btn btn-primary">提交并获取诊断报告</button>
         </div>
       </form>
-      <iframe name="hiddenFrame" style="display:none;"></iframe>
       <div class="form-success" id="formSuccess">
         <div class="form-success-icon">&#10003;</div>
         <div class="form-success-title">提交成功！</div>
@@ -815,23 +813,17 @@ function submitForm(e) {
   };
   console.log('[Lead Submission]', JSON.stringify(payload, null, 2));
 
-  // Send via QQ SMTP
-  Email.send({
-    SecureToken: '', // not used, auth via username/password
-    Host: 'smtp.qq.com',
-    Username: '21291228@qq.com',
-    Password: 'mcszzittgclvcadd',
-    To: '21291228@qq.com',
-    From: '21291228@qq.com',
-    Subject: '【数据资产自测】新线索',
-    Body: `企业名称: ${company}<br>
-联系人: ${name}<br>
-手机号: ${phone}<br>
-城市: ${city}<br>
-行业: ${industry}<br>
-企业规模: ${scale}<br>
-来源: 数据资产入表自测H5<br>
-提交时间: ${payload.timestamp}`
+  // Push to DingTalk
+  fetch('https://oapi.dingtalk.com/robot/send?access_token=256faaf51469177d0119d238db52d62ece737d5230cce1458100504df27fbd54', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      msgtype: 'markdown',
+      markdown: {
+        title: '数据资产入表自测新线索',
+        text: `## 数据资产入表自测 · 新线索\n\n---\n\n**企业名称**：${company}\n\n**联系人**：${name}\n\n**手机号**：${phone}\n\n**城市**：${city}\n\n**行业**：${industry}\n\n**企业规模**：${scale}\n\n**提交时间**：${payload.timestamp}\n\n---\n> 来源：数据资产入表自测H5`
+      }
+    })
   }).catch(() => {});
 
   // Show success
