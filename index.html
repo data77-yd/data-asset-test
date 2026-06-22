@@ -6,6 +6,7 @@
 <title>数据资产入表条件自测 | 云端互联</title>
 <meta name="description" content="18道专业测评，3分钟快速诊断您的企业是否具备入表条件">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -814,17 +815,23 @@ function submitForm(e) {
   };
   console.log('[Lead Submission]', JSON.stringify(payload, null, 2));
 
-  // Send to email via web3forms
-  fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      access_key: 'bd5edd8d-0535-462c-b834-e1d72d9c5e0f',
-      subject: '【数据资产自测】新线索',
-      企业名称: company, 联系人: name, 手机号: phone, 城市: city,
-      行业: industry, 企业规模: scale,
-      来源: '数据资产入表自测H5', 提交时间: payload.timestamp
-    })
+  // Send via QQ SMTP
+  Email.send({
+    SecureToken: '', // not used, auth via username/password
+    Host: 'smtp.qq.com',
+    Username: '21291228@qq.com',
+    Password: 'mcszzittgclvcadd',
+    To: '21291228@qq.com',
+    From: '21291228@qq.com',
+    Subject: '【数据资产自测】新线索',
+    Body: `企业名称: ${company}<br>
+联系人: ${name}<br>
+手机号: ${phone}<br>
+城市: ${city}<br>
+行业: ${industry}<br>
+企业规模: ${scale}<br>
+来源: 数据资产入表自测H5<br>
+提交时间: ${payload.timestamp}`
   }).catch(() => {});
 
   // Show success
