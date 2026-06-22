@@ -278,6 +278,9 @@ body {
       <div class="form-title">预约专家 1对1 诊断</div>
       <div class="form-subtitle">提交信息后，我们的数据资产专家将在1个工作日内与您联系</div>
       <form id="leadForm" onsubmit="submitForm(event)">
+        <input type="hidden" name="_subject" value="【数据资产自测】新线索">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
         <div class="form-group">
           <label class="form-label">企业名称 <span class="required">*</span></label>
           <input type="text" class="form-input" id="fCompany" placeholder="请输入企业全称" required>
@@ -802,13 +805,32 @@ function submitForm(e) {
 
   if (!valid) return;
 
-  // Collect and log
+  // Collect and send
   const payload = {
     company, name, phone, city, industry, scale,
     timestamp: new Date().toISOString(),
     source: '数据资产入表自测H5'
   };
   console.log('[Lead Submission]', JSON.stringify(payload, null, 2));
+
+  // Send to email via formsubmit.co
+  fetch('https://formsubmit.co/ajax/21291228@qq.com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      企业名称: company,
+      联系人: name,
+      手机号: phone,
+      城市: city,
+      行业: industry,
+      企业规模: scale,
+      来源: '数据资产入表自测H5',
+      提交时间: payload.timestamp,
+      _subject: '【数据资产自测】新线索',
+      _captcha: 'false',
+      _template: 'table'
+    })
+  }).catch(() => {});
 
   // Show success
   document.getElementById('leadForm').style.display = 'none';
