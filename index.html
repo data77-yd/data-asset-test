@@ -278,9 +278,6 @@ body {
       <div class="form-title">预约专家 1对1 诊断</div>
       <div class="form-subtitle">提交信息后，我们的数据资产专家将在1个工作日内与您联系</div>
       <form id="leadForm" onsubmit="submitForm(event)">
-        <input type="hidden" name="_subject" value="【数据资产自测】新线索">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
         <div class="form-group">
           <label class="form-label">企业名称 <span class="required">*</span></label>
           <input type="text" class="form-input" id="fCompany" placeholder="请输入企业全称" required>
@@ -805,52 +802,49 @@ function submitForm(e) {
 
   if (!valid) return;
 
-  // Collect and send
-  const payload = {
-    company, name, phone, city, industry, scale,
-    timestamp: new Date().toISOString(),
-    source: '数据资产入表自测H5'
-  };
-  console.log('[Lead Submission]', JSON.stringify(payload, null, 2));
-
-  // Compute score from answers
-  const dimLabels = ['数据资源','合规确权','质量评估','治理制度','入表准备','产品交易'];
-  const dimScores = [0,0,0,0,0,0];
+  // 计算得分
+  const scoreMap = [3, 1, 0];
+  const dimScores = [0, 0, 0, 0, 0, 0];
   let totalScore = 0;
-  answers.forEach((opt, i) => {
-    if (opt !== null) {
-      const score = opt === 0 ? 3 : (opt === 1 ? 1 : 0);
-      const dim = Math.floor(i / 3);
-      dimScores[dim] += score;
-      totalScore += score;
+  for (let i = 0; i < 18; i++) {
+    if (answers[i] !== null) {
+      const s = scoreMap[answers[i]];
+      const dimIdx = Math.floor(i / 3);
+      dimScores[dimIdx] += s;
+      totalScore += s;
     }
-  });
-  const levelCfg = LEVEL_CONFIG.find(l => totalScore >= l.min && totalScore <= l.max);
+  }
 
-  // Push to Server酱 (WeChat notification)
+  // 确定等级
+  let levelCfg = LEVEL_CONFIG.L4;
+  for (const [key, cfg] of Object.entries(LEVEL_CONFIG)) {
+    if (totalScore >= cfg.min && totalScore <= cfg.max) {
+      levelCfg = cfg;
+      break;
+    }
+  }
+
+  // 构建推送内容
+  let desp = '【总分】' + totalScore + '分 / 54分\n';
+  desp += '【等级】' + levelCfg.label + '\n\n';
+  desp += '【六维度得分】\n';
+  for (let i = 0; i < 6; i++) {
+    desp += RADAR_LABELS[i] + '：' + dimScores[i] + ' / 9 分\n';
+  }
+  desp += '\n【留资信息】\n企业名称：' + company + '\n姓名：' + name + '\n手机号：' + phone + '\n城市：' + city + '\n行业：' + industry + '\n规模：' + scale;
+
+  // Server酱推送
   fetch('https://sctapi.ftqq.com/SCT368749Ta54rDvz2PhyqHbobGI8p7IRC.send', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      title: `【${levelCfg.label}】${company} · ${name}`,
-      desp: `## 数据资产入表自测 · 新线索\n\n` +
-        `**自测得分**：${totalScore}/54 · ${levelCfg.label}\n\n` +
-        `**六维度得分**\n` +
-        dimLabels.map((l, i) => `- ${l}：${dimScores[i]}/9`).join('\n') +
-        `\n\n---\n\n` +
-        `**企业名称**：${company}\n\n` +
-        `**联系人**：${name}\n\n` +
-        `**手机号**：${phone}\n\n` +
-        `**城市**：${city}\n\n` +
-        `**行业**：${industry}\n\n` +
-        `**企业规模**：${scale}\n\n` +
-        `**提交时间**：${payload.timestamp}`
+      title: '【' + levelCfg.label + '】' + company + ' · ' + name,
+      desp: desp
     })
-  }).then(r => r.json()).then(j => {
-    console.log('[Server酱]', j);
-  }).catch(err => {
-    console.error('[Server酱 Error]', err);
-  });
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(j) { console.log('[Server酱]', j); })
+  .catch(function(err) { console.error('[Server酱] 推送失败', err); });
 
   // Show success
   document.getElementById('leadForm').style.display = 'none';
