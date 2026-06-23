@@ -813,21 +813,43 @@ function submitForm(e) {
   };
   console.log('[Lead Submission]', JSON.stringify(payload, null, 2));
 
-  // Push to DingTalk
-  fetch('https://oapi.dingtalk.com/robot/send?access_token=256faaf51469177d0119d238db52d62ece737d5230cce1458100504df27fbd54', {
+  // Compute score from answers
+  const dimLabels = ['数据资源','合规确权','质量评估','治理制度','入表准备','产品交易'];
+  const dimScores = [0,0,0,0,0,0];
+  let totalScore = 0;
+  answers.forEach((opt, i) => {
+    if (opt !== null) {
+      const score = opt === 0 ? 3 : (opt === 1 ? 1 : 0);
+      const dim = Math.floor(i / 3);
+      dimScores[dim] += score;
+      totalScore += score;
+    }
+  });
+  const levelCfg = LEVEL_CONFIG.find(l => totalScore >= l.min && totalScore <= l.max);
+
+  // Push to Server酱 (WeChat notification)
+  fetch('https://sctapi.ftqq.com/SCT368749Ta54rDvz2PhyqHbobGI8p7IRC.send', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      msgtype: 'markdown',
-      markdown: {
-        title: '数据资产入表自测新线索',
-        text: `## 数据资产入表自测 · 新线索\n\n---\n\n**企业名称**：${company}\n\n**联系人**：${name}\n\n**手机号**：${phone}\n\n**城市**：${city}\n\n**行业**：${industry}\n\n**企业规模**：${scale}\n\n**提交时间**：${payload.timestamp}\n\n---\n> 来源：数据资产入表自测H5`
-      }
+      title: `【${levelCfg.label}】${company} · ${name}`,
+      desp: `## 数据资产入表自测 · 新线索\n\n` +
+        `**自测得分**：${totalScore}/54 · ${levelCfg.label}\n\n` +
+        `**六维度得分**\n` +
+        dimLabels.map((l, i) => `- ${l}：${dimScores[i]}/9`).join('\n') +
+        `\n\n---\n\n` +
+        `**企业名称**：${company}\n\n` +
+        `**联系人**：${name}\n\n` +
+        `**手机号**：${phone}\n\n` +
+        `**城市**：${city}\n\n` +
+        `**行业**：${industry}\n\n` +
+        `**企业规模**：${scale}\n\n` +
+        `**提交时间**：${payload.timestamp}`
     })
   }).then(r => r.json()).then(j => {
-    console.log('[DingTalk]', j);
+    console.log('[Server酱]', j);
   }).catch(err => {
-    console.error('[DingTalk Error]', err);
+    console.error('[Server酱 Error]', err);
   });
 
   // Show success
