@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据要素政策法规日报 | 2026年6月2日</title>
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --card-bg: #ffffff;
+    --text: #2c3e50;
+    --text-secondary: #5a6a7e;
+    --accent: #2563eb;
+    --accent-light: #dbeafe;
+    --accent-dark: #1d4ed8;
+    --border: #e2e8f0;
+    --tag-bg: #eff6ff;
+    --tag-text: #2563eb;
+    --highlight-bg: #fef9c3;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Banner */
+  .banner {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #3b82f6 100%);
+    color: #fff;
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .banner::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 60%),
+                radial-gradient(circle at 70% 30%, rgba(255,255,255,0.04) 0%, transparent 50%);
+  }
+  .banner h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .banner .subtitle {
+    font-size: 15px;
+    opacity: 0.85;
+    position: relative;
+    font-weight: 400;
+  }
+  .banner .date-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 13px;
+    margin-top: 12px;
+    position: relative;
+  }
+
+  /* Container */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+  }
+
+  /* Section */
+  .section {
+    margin-top: 24px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    line-height: 1.4;
+  }
+  .section-title .icon {
+    margin-right: 6px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Highlight card */
+  .card-highlight {
+    border-left: 4px solid var(--accent);
+    background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.5;
+    flex: 1;
+    min-width: 200px;
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+  }
+  .card-tag.red {
+    background: #fef2f2;
+    color: #dc2626;
+  }
+  .card-tag.green {
+    background: #f0fdf4;
+    color: #16a34a;
+  }
+  .card-tag.amber {
+    background: #fffbeb;
+    color: #d97706;
+  }
+  .card-source {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .card-body p {
+    margin-bottom: 10px;
+    color: #475569;
+    font-size: 14.5px;
+  }
+  .card-body p:last-child { margin-bottom: 0; }
+
+  .points {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+  }
+  .points li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 7px;
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.65;
+  }
+  .points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .points li strong {
+    color: #1e293b;
+  }
+
+  /* Category grid */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 14px;
+  }
+  .cat-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cat-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  .cat-card .cat-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
+  .cat-card .cat-item {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 5px;
+    padding-left: 12px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .cat-card .cat-item::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .cat-card .cat-item strong {
+    color: #1e293b;
+  }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    min-width: 700px;
+  }
+  table thead th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 700;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+  }
+  table tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    color: #475569;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  table tbody tr:hover {
+    background: #f8fafc;
+  }
+  table tbody td:first-child {
+    font-weight: 600;
+    color: #1e293b;
+    white-space: nowrap;
+  }
+  table .col-status {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .status-active {
+    display: inline-block;
+    background: #dcfce7;
+    color: #166534;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  .status-draft {
+    display: inline-block;
+    background: #fef9c3;
+    color: #854d0e;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  .status-enacted {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+  .footer strong { color: #64748b; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .banner { padding: 32px 16px 28px; }
+    .banner h1 { font-size: 22px; }
+    .container { padding: 0 12px 28px; }
+    .card { padding: 16px; }
+    .card-title { font-size: 15px; }
+    .section-title { font-size: 17px; }
+    .cat-grid { grid-template-columns: 1fr; }
+    table { font-size: 12px; }
+    table thead th, table tbody td { padding: 8px 10px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .banner { background: #1e3a5f !important; -webkit-print-color-adjust: exact; }
+    .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    .cat-card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ BANNER ============ -->
+<div class="banner">
+  <h1>数据要素政策法规日报</h1>
+  <p class="subtitle">每日追踪数据要素领域最新政策动向与法规进展</p>
+  <span class="date-badge">2026年6月2日 星期二</span>
+</div>
+
+<div class="container">
+
+<!-- ============ 今日关注 ============ -->
+<div class="section">
+  <div class="section-title">今日关注</div>
+
+  <!-- 关注1 -->
+  <div class="card card-highlight">
+    <div class="card-header">
+      <div class="card-title">国家数据局印发《2026年数字经济发展工作要点》，部署8大重点任务</div>
+      <span class="card-tag red">重磅</span>
+    </div>
+    <div class="card-source">来源：国家数据局 &nbsp;|&nbsp; 2026年5月19日</div>
+    <div class="card-body">
+      <p>国家数据局正式印发<strong>《2026年数字经济发展工作要点》</strong>，对推进数字经济高质量发展作出部署，提出<strong>8个方面重点任务</strong>，标志着2026"数据要素价值释放年"进入全面落地阶段。</p>
+      <ul class="points">
+        <li><strong>深化数据要素市场化配置改革</strong>：加快建立全国统一数据产权登记制度，印发登记指引，制定全国一体化数据市场相关政策文件。</li>
+        <li><strong>强化数据赋能人工智能发展</strong>：实施6大专项行动，形成一批满足AI就绪度的<strong>标杆性高质量数据集</strong>。</li>
+        <li><strong>提升数字经济核心竞争力</strong>：构建"政府+企业+创新+投资"四合一的专业化遴选培育机制，组建数字经济创新型企业培育库。</li>
+        <li><strong>推进数字经济促进法立法进程</strong>，强化重要数据和核心数据识别与保护。</li>
+        <li><strong>深化数字经济国际合作</strong>：建设跨境可信数据空间，积极参与数据领域国际规则标准制定。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 关注2 -->
+  <div class="card card-highlight">
+    <div class="card-header">
+      <div class="card-title">全国首单纯数据资产ABS落地，千亿蓝海蓄势待发</div>
+      <span class="card-tag green">突破</span>
+    </div>
+    <div class="card-source">来源：新华财经 &nbsp;|&nbsp; 2026年4月8日 / 2026年5月</div>
+    <div class="card-body">
+      <p>2026年以来，数据资产证券化（ABS）市场呈现爆发式增长。<strong>截至4月初</strong>，沪深交易所年内已受理<strong>39单</strong>数据资产ABS项目，累计受理突破<strong>60单</strong>，申报总规模超<strong>1293亿元</strong>。3月单月受理<strong>30单</strong>，超越2025年全年。</p>
+      <ul class="points">
+        <li>青岛数据集团牵头推动<strong>全国首例纯数据资产信托收益权ABS</strong>，发行总额<strong>10亿元</strong>，首次实现数据要素从"依附"走向"独立"。</li>
+        <li>江苏宿城区落地<strong>全国首单100%数据资产质押债权类ABS</strong>，票面利率低至<strong>1.85%</strong>，创全国同类项目新低。</li>
+        <li>产品结构形成"数据资产入池"与"数据赋能传统资产"<strong>双轨并行</strong>格局，纯数据资产ABS代表着行业探索前沿方向。</li>
+        <li>已发行产品票面利率集中在<strong>2%至3%</strong>区间，定价中枢趋于理性，市场接受度持续提升。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 关注3 -->
+  <div class="card card-highlight">
+    <div class="card-header">
+      <div class="card-title">工信部与国家数据局联合启动2026年"模数共振"行动</div>
+      <span class="card-tag amber">产业</span>
+    </div>
+    <div class="card-source">来源：新华网、工信微报 &nbsp;|&nbsp; 2026年4月28日</div>
+    <div class="card-body">
+      <p>4月28日，工业和信息化部、国家数据局联合印发通知，正式启动<strong>2026年"模数共振"行动</strong>，推动人工智能模型与数据资源协同互促，助力AI高水平赋能新型工业化。</p>
+      <ul class="points">
+        <li>面向<strong>20个重点行业</strong>（钢铁、汽车、医疗装备、电子元器件等），通过7大重点任务牵引。</li>
+        <li>核心目标：构建行业通识与专识高质量数据集，研发行业模型、专用模型及特色智能体。</li>
+        <li>创建<strong>"模数共振"空间</strong>，打造具备数据汇聚、模型训练能力的协同平台，逐步发展为"智能体工厂"。</li>
+        <li>时间线：5月30日前报送实施方案 → 8月30日前中期评估 → 11月30日前报送总结报告。</li>
+        <li>目标到2026年底形成<strong>"数据-模型-场景应用"良性互促循环</strong>。</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 政策分类速览 ============ -->
+<div class="section">
+  <div class="section-title">政策分类速览</div>
+  <div class="cat-grid">
+
+    <!-- 数据产权 -->
+    <div class="cat-card">
+      <div class="cat-name">数据产权</div>
+      <div class="cat-item"><strong>《2026年数字经济发展工作要点》</strong>：加快建立全国统一数据产权登记制度，印发登记指引（2026.5）</div>
+      <div class="cat-item"><strong>《数据产权登记工作指引(试行)》</strong>征求意见：构建"一次登记、全国通用"体系，明确登记机构/流程/凭证应用（2026.4）</div>
+      <div class="cat-item"><strong>数据产权结构性分置制度</strong>系列解读：厘清数据持有权、使用权、经营权边界（2026.4）</div>
+    </div>
+
+    <!-- 数据资产 -->
+    <div class="cat-card">
+      <div class="cat-name">数据资产</div>
+      <div class="cat-item"><strong>《国有资产法(草案)》</strong>首次将数据资产纳入法律监管范畴，明确与实物资产并列管理地位（2026.1）</div>
+      <div class="cat-item"><strong>央行征信中心</strong>将"数据资产质押"纳入动产融资统一登记（中登网），数据获法定动产地位（2025.11）</div>
+      <div class="cat-item"><strong>全国首单纯数据资产ABS</strong>落地，发行总额10亿元（2026.5）</div>
+    </div>
+
+    <!-- 数据流通 -->
+    <div class="cat-card">
+      <div class="cat-name">数据流通</div>
+      <div class="cat-item"><strong>四部门联合发文</strong>：培育数据流通服务机构，明确交易所/平台企业/数据商功能定位（2026.2）</div>
+      <div class="cat-item"><strong>六部门《实施方案》</strong>：完善数据流通安全治理，到2027年底构建规则明晰的治理体系（2025.1）</div>
+      <div class="cat-item"><strong>全国一体化数据市场</strong>建设提速，制定开放共享安全的政策文件（2026.5）</div>
+    </div>
+
+    <!-- 数据融资 -->
+    <div class="cat-card">
+      <div class="cat-name">数据融资</div>
+      <div class="cat-item"><strong>数据资产ABS</strong>年内受理39单，累计规模超1293亿元，单月受理量超2025年全年（2026.4）</div>
+      <div class="cat-item"><strong>衡水特色产业集群</strong>数据产权登记+质押融资落地，探索"以数换贷"新模式（2026.5）</div>
+      <div class="cat-item"><strong>数据集质押融资、作价入股、资产证券化</strong>等多元化资产化创新模式被鼓励探索（2026.4）</div>
+    </div>
+
+    <!-- 产业动态 -->
+    <div class="cat-card">
+      <div class="cat-name">产业动态</div>
+      <div class="cat-item"><strong>"模数共振"行动</strong>：工信部×国家数据局联合推动AI模型与数据资源协同（2026.4）</div>
+      <div class="cat-item"><strong>行业高质量数据集建设</strong>实施方案征求意见，6大专项行动推进（2026.4）</div>
+      <div class="cat-item"><strong>数字经济创新型企业培育库</strong>组建，"政府+企业+创新+投资"遴选机制（2026.5）</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ 核心政策汇总表 ============ -->
+<div class="section">
+  <div class="section-title">核心政策法规汇总表</div>
+  <div class="card" style="padding: 20px 20px 12px;">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:42%;">政策名称</th>
+            <th style="width:15%;">发文机关</th>
+            <th style="width:13%;">时间</th>
+            <th style="width:12%;">状态</th>
+            <th style="width:18%;">核心关键词</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2026年数字经济发展工作要点</td>
+            <td>国家数据局</td>
+            <td>2026.5.19</td>
+            <td><span class="status-active">已印发</span></td>
+            <td>8大任务、统一产权登记、高质量数据集</td>
+          </tr>
+          <tr>
+            <td>关于培育数据流通服务机构 加快推进数据要素市场化价值化的意见</td>
+            <td>国家数据局等四部门</td>
+            <td>2026.2.3</td>
+            <td><span class="status-enacted">已发布</span></td>
+            <td>流通服务机构、数据交易所、数据商</td>
+          </tr>
+          <tr>
+            <td>数据产权登记工作指引(试行)</td>
+            <td>国家数据局</td>
+            <td>2026.4</td>
+            <td><span class="status-draft">征求意见</span></td>
+            <td>一次登记全国通用、三权分置、合规审查</td>
+          </tr>
+          <tr>
+            <td>关于完善数据流通安全治理 更好促进数据要素市场化价值化的实施方案</td>
+            <td>国家发改委等六部门</td>
+            <td>2025.1.6</td>
+            <td><span class="status-enacted">已发布</span></td>
+            <td>安全治理、分类分级、7项主要任务</td>
+          </tr>
+          <tr>
+            <td>动产融资统一登记——数据资产质押纳入登记范围</td>
+            <td>央行征信中心</td>
+            <td>2025.11</td>
+            <td><span class="status-active">已实施</span></td>
+            <td>数据动产化、质押登记、中登网</td>
+          </tr>
+          <tr>
+            <td>中华人民共和国国有资产法(草案)</td>
+            <td>全国人大常委会</td>
+            <td>2026.1</td>
+            <td><span class="status-draft">审议中</span></td>
+            <td>数据资产入法、并列管理、国有资产</td>
+          </tr>
+          <tr>
+            <td>2026年"模数共振"行动通知</td>
+            <td>工信部、国家数据局</td>
+            <td>2026.4.28</td>
+            <td><span class="status-active">已启动</span></td>
+            <td>AI+数据、20行业、智能体工厂</td>
+          </tr>
+          <tr>
+            <td>行业高质量数据集建设行动实施方案</td>
+            <td>国家数据局</td>
+            <td>2026.4.15</td>
+            <td><span class="status-draft">征求意见</span></td>
+            <td>数据集资产化、质押融资、ABS</td>
+          </tr>
+          <tr>
+            <td>全国首单纯数据资产ABS</td>
+            <td>青岛数据集团等</td>
+            <td>2026.5</td>
+            <td><span class="status-active">已落地</span></td>
+            <td>纯数据资产、信托收益权、10亿元</td>
+          </tr>
+          <tr>
+            <td>衡水特色产业集群数据产权登记+质押融资</td>
+            <td>衡水市</td>
+            <td>2026.5</td>
+            <td><span class="status-active">已落地</span></td>
+            <td>产业集群、产权登记、以数换贷</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 页脚 ============ -->
+<div class="footer">
+  <p><strong>更新时间：</strong>2026年6月2日 星期二</p>
+  <p><strong>数据来源：</strong>国家数据局官网（nda.gov.cn）、新华网、新华财经、中国经济时报、证券时报、中国网、中国金融信息网等权威媒体及政府公开信息</p>
+  <p>本报告由智能助手自动采集整理，仅供信息参考，不构成任何政策建议或投资建议。如需获取完整政策原文，请访问各发文机关官方网站。</p>
+</div>
+
+</div>
+
+</body>
+</html>
